@@ -1,13 +1,19 @@
 ﻿feature,src_rank,shap_rank,ridgecv_r2_base_src18,ridgecv_r2_with_feature,incremental_r2,interpretation
-u_ground,27.0,17.0,0.9154994956508189,0.915475883808271,-2.3611842547843764e-05,SHAP-only variable; tests whether nonlinear importance implies omitted predictive value
-room_area,39.0,3.0,0.9154994956508189,0.915242622818659,-0.00025687283215991563,SHAP-only variable; tests whether nonlinear importance implies omitted predictive value
-fan_eff,35.0,16.0,0.9154994956508189,0.915208362436986,-0.0002911332138328948,SHAP-only variable; tests whether nonlinear importance implies omitted predictive value
-cop_cooling,34.0,9.0,0.9154994956508189,0.9145847957747417,-0.0009146998760771741,SHAP-only variable; tests whether nonlinear importance implies omitted predictive value
-shgc_w,25.0,12.0,0.9154994956508189,0.9118049630575495,-0.0036945325932693507,SHAP-only variable; tests whether nonlinear importance implies omitted predictive value
-shgc_n,32.0,18.0,0.9154994956508189,0.9108796063774728,-0.004619889273346112,SHAP-only variable; tests whether nonlinear importance implies omitted predictive value
-aspect_ratio,11.0,20.0,0.9154994956508189,,,SRC-only variable; mostly reflects stable linear main-effect contribution
-heat_set,15.0,32.0,0.9154994956508189,,,SRC-only variable; mostly reflects stable linear main-effect contribution
-orientation_cos,7.0,37.0,0.9154994956508189,,,SRC-only variable; mostly reflects stable linear main-effect contribution
-orientation_sin,8.0,25.0,0.9154994956508189,,,SRC-only variable; mostly reflects stable linear main-effect contribution
-public_area,18.0,34.0,0.9154994956508189,,,SRC-only variable; mostly reflects stable linear main-effect contribution
-wwr,9.0,27.0,0.9154994956508189,,,SRC-only variable; mostly reflects stable linear main-effect contribution
+roof_insul_thick,28.0,9.0,0.9523325376228529,0.9524858848035533,0.00015334718070048048,SHAP-only variable; tests whether nonlinear importance implies omitted predictive value
+u_ground,30.0,8.0,0.9523325376228529,0.9513733929053974,-0.0009591447174555068,SHAP-only variable; tests whether nonlinear importance implies omitted predictive value
+wall_thick,25.0,15.0,0.9523325376228529,0.9498630667951016,-0.0024694708277512856,SHAP-only variable; tests whether nonlinear importance implies omitted predictive value
+insul_thick,27.0,17.0,0.9523325376228529,0.9497958985441903,-0.002536639078662528,SHAP-only variable; tests whether nonlinear importance implies omitted predictive value
+shgc_s,23.0,11.0,0.9523325376228529,0.9494829470502004,-0.0028495905726524384,SHAP-only variable; tests whether nonlinear importance implies omitted predictive value
+room_area,29.0,6.0,0.9523325376228529,0.9487904405557579,-0.0035420970670949625,SHAP-only variable; tests whether nonlinear importance implies omitted predictive value
+heat_set,26.0,14.0,0.9523325376228529,0.9485542837014508,-0.003778253921402075,SHAP-only variable; tests whether nonlinear importance implies omitted predictive value
+public_area,39.0,18.0,0.9523325376228529,0.9476363201066258,-0.004696217516227064,SHAP-only variable; tests whether nonlinear importance implies omitted predictive value
+u_win_e,37.0,7.0,0.9523325376228529,0.9427399815926452,-0.0095925560302077,SHAP-only variable; tests whether nonlinear importance implies omitted predictive value
+cool_set,14.0,20.0,0.9523325376228529,,,SRC-only variable; mostly reflects stable linear main-effect contribution
+dhw_temp,17.0,34.0,0.9523325376228529,,,SRC-only variable; mostly reflects stable linear main-effect contribution
+floor_height,18.0,31.0,0.9523325376228529,,,SRC-only variable; mostly reflects stable linear main-effect contribution
+floor_num,7.0,19.0,0.9523325376228529,,,SRC-only variable; mostly reflects stable linear main-effect contribution
+orientation_cos,8.0,37.0,0.9523325376228529,,,SRC-only variable; mostly reflects stable linear main-effect contribution
+orientation_sin,5.0,29.0,0.9523325376228529,,,SRC-only variable; mostly reflects stable linear main-effect contribution
+shgc_e,9.0,22.0,0.9523325376228529,,,SRC-only variable; mostly reflects stable linear main-effect contribution
+u_win_n,16.0,25.0,0.9523325376228529,,,SRC-only variable; mostly reflects stable linear main-effect contribution
+u_win_s,15.0,23.0,0.9523325376228529,,,SRC-only variable; mostly reflects stable linear main-effect contribution

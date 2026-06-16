@@ -91,7 +91,6 @@ print(f'Python {numpy.__version__}')
 │   │   ├── 02_SRC_Sensitivity_and_Variable_Selection.ipynb       ← 步骤2
 │   │   ├── 03_ML_Model_Training_and_Evaluation.ipynb             ← 步骤3
 │   │   └── 04_EUI_OCEI_Coupling_and_Carbon_Analysis.ipynb        ← 步骤4
-│   ├── tools/                                      ← 图件生成、Notebook 修订和表格脚本
 │   └── original_package/                           ← 原始代码压缩包与解压副本
 │
 ├── input/
@@ -146,6 +145,7 @@ print(f'Python {numpy.__version__}')
 - 四个 Notebook 必须**按顺序**运行（01 → 02 → 03 → 04）
 - 每个 Notebook 依赖前一步的输出文件
 - **随机种子已固定为 42**，保证可复现性
+- 复现主流程只依赖 `experiment_code/notebooks/` 中的四个 Notebook；不需要额外 `tools` 脚本。
 
 ### 步骤 1: 参数化仿真数据库构建
 
@@ -415,7 +415,9 @@ jupyter notebook
 
 ## 9. 2026-06-16 V1 目录与证据增强
 
-本版本将工作区整理为五类核心材料：`experiment_code/` 存放实验代码，`reviewer_comments/` 存放审稿意见与回复材料，`manuscript/` 存放论文正文，`paper_assets/` 存放非中间计算输出的论文素材图，`outputs_step1/` 至 `outputs_step4/` 保持为四步实验输出目录。Notebook 已加入项目根目录自动识别逻辑，因此从仓库根目录或 `experiment_code/notebooks/` 中启动均会把输出写回根目录下的标准输出文件夹。
+本版本将工作区整理为五类核心材料：`experiment_code/` 存放四个实验 Notebook，`reviewer_comments/` 存放审稿意见与回复材料，`manuscript/` 存放论文正文，`paper_assets/` 存放非中间计算输出的论文素材图，`outputs_step1/` 至 `outputs_step4/` 保持为四步实验输出目录。Notebook 已加入项目根目录自动识别逻辑，因此从仓库根目录或 `experiment_code/notebooks/` 中启动均会把输出写回根目录下的标准输出文件夹。
+
+为保持评审复现路径简洁，GitHub 提交版不再要求任何外部 `tools` 脚本。工程示意图和研究流程链路图的生成函数已经内嵌在 `01_Parametric_Simulation_Database_Construction.ipynb` 中；四个 Notebook 按 01 → 02 → 03 → 04 顺序运行即可完成主流程。
 
 本版本进一步加入面向审稿说服力的补充分析：
 
