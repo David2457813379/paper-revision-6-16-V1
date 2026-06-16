@@ -18,6 +18,7 @@
 7. [引用声明](#7-引用声明)
 8. [2026-06-15审稿修订验证补充](#8-2026-06-15审稿修订验证补充)
 9. [2026-06-16 V1 目录与证据增强](#9-2026-06-16-v1-目录与证据增强)
+10. [可选质量检查工具](#10-可选质量检查工具)
 
 ---
 
@@ -135,6 +136,11 @@ print(f'Python {numpy.__version__}')
 │   ├── audits/
 │   └── templates/
 │
+├── tools/                                       ← 可选质量检查工具，不属于主复现依赖
+│   ├── check_repository_quality.py              ← 静态检查代码、图文和输出文件
+│   ├── validate_notebooks.py                    ← 按 01→04 顺序执行 Notebook
+│   └── README.md                                ← tools 详细说明
+│
 └── manuscript/                                  ← 修订版论文 Word/Markdown 文件
 ```
 
@@ -145,7 +151,7 @@ print(f'Python {numpy.__version__}')
 - 四个 Notebook 必须**按顺序**运行（01 → 02 → 03 → 04）
 - 每个 Notebook 依赖前一步的输出文件
 - **随机种子已固定为 42**，保证可复现性
-- 复现主流程只依赖 `experiment_code/notebooks/` 中的四个 Notebook；不需要额外 `tools` 脚本。
+- 复现主流程只依赖 `experiment_code/notebooks/` 中的四个 Notebook；`tools/` 只用于可选质量检查和自动化验证，不会被 Notebook 导入。
 
 ### 步骤 1: 参数化仿真数据库构建
 
@@ -417,7 +423,7 @@ jupyter notebook
 
 本版本将工作区整理为五类核心材料：`experiment_code/` 存放四个实验 Notebook，`reviewer_comments/` 存放审稿意见与回复材料，`manuscript/` 存放论文正文，`paper_assets/` 存放非中间计算输出的论文素材图，`outputs_step1/` 至 `outputs_step4/` 保持为四步实验输出目录。Notebook 已加入项目根目录自动识别逻辑，因此从仓库根目录或 `experiment_code/notebooks/` 中启动均会把输出写回根目录下的标准输出文件夹。
 
-为保持评审复现路径简洁，GitHub 提交版不再要求任何外部 `tools` 脚本。工程示意图和研究流程链路图的生成函数已经内嵌在 `01_Parametric_Simulation_Database_Construction.ipynb` 中；四个 Notebook 按 01 → 02 → 03 → 04 顺序运行即可完成主流程。
+为保持评审复现路径简洁，GitHub 提交版的主流程不依赖任何外部 `tools` 脚本。工程示意图和研究流程链路图的生成函数已经内嵌在 `01_Parametric_Simulation_Database_Construction.ipynb` 中；四个 Notebook 按 01 → 02 → 03 → 04 顺序运行即可完成主流程。根目录 `tools/` 仅作为可选质量检查工具箱，用于修改代码后快速发现语法、英文图文、输出文件和跨 Notebook 依赖问题。
 
 本版本进一步加入面向审稿说服力的补充分析：
 
@@ -438,3 +444,42 @@ python -m jupyter notebook experiment_code/notebooks
 ```
 
 正式复现实验仍应使用 `EUI_FAST_MODE=0`、`EUI_N_SAMPLES=20000`、`EUI_RUN_ENERGYPLUS=1`，并确认 `C:/EnergyPlusV25-2-0/energyplus.exe` 可用。
+
+## 10. 可选质量检查工具
+
+`tools/` 的定位是“投稿前自检”和“代码修改后回归验证”，不是论文代码的第五部分。评审或读者复现论文时仍只需运行四个 Notebook。
+
+### 10.1 静态质量检查
+
+```powershell
+python tools/check_repository_quality.py
+```
+
+该脚本检查四类问题：
+
+1. 四个 Notebook 代码单元是否存在 Python 语法错误。
+2. 代码单元是否残留中文图表文本、全角符号、特殊 dash、上标字符或中点单位符号。
+3. 四个 Notebook 是否错误依赖可选 `tools/`。
+4. `outputs_step1/` 至 `outputs_step4/` 和 `paper_assets/` 中的 CSV、TXT、SVG、JSON、MD 是否残留中文字符。
+
+### 10.2 快速执行验证
+
+```powershell
+python tools/validate_notebooks.py --fast --samples 200
+```
+
+该脚本会设置 `EUI_FAST_MODE=1`、`EUI_N_SAMPLES=200`、`EUI_RUN_ENERGYPLUS=0`，然后按 `01 → 02 → 03 → 04` 顺序执行四个 Notebook。它适合用于确认 Python 逻辑、绘图、文件读写、跨 Notebook 依赖和空结果分支均不报错。
+
+如需在小样本验证中允许 EnergyPlus 参与运行，可使用：
+
+```powershell
+python tools/validate_notebooks.py --fast --samples 200 --run-energyplus
+```
+
+验证日志保存在：
+
+```text
+archive/validation/
+```
+
+该目录默认不提交到 GitHub，仅作为本地调试证据。
