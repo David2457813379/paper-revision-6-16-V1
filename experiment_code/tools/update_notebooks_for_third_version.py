@@ -6,7 +6,15 @@ from pathlib import Path
 import nbformat
 
 
-ROOT = Path(__file__).resolve().parents[1]
+def find_repo_root(start: Path) -> Path:
+    start = start.resolve()
+    for candidate in [start, *start.parents]:
+        if (candidate / "input" / "Beijing.epw").exists() or (candidate / ".git").exists():
+            return candidate
+    return Path.cwd().resolve()
+
+
+ROOT = find_repo_root(Path(__file__))
 
 
 INTRO_START = "<!-- CODEx bilingual cell explanation: start -->"

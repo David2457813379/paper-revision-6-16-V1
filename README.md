@@ -16,6 +16,8 @@
 5. [预期输出](#5-预期输出)
 6. [常见问题](#6-常见问题)
 7. [引用声明](#7-引用声明)
+8. [2026-06-15审稿修订验证补充](#8-2026-06-15审稿修订验证补充)
+9. [2026-06-16 V1 目录与证据增强](#9-2026-06-16-v1-目录与证据增强)
 
 ---
 
@@ -80,12 +82,17 @@ print(f'Python {numpy.__version__}')
 ```
 论文修改/
 ├── README.md                                    ← 本文件
-├── CLAUDE.md                                    ← AI 辅助配置
+├── AGENTS.md                                    ← 项目级工作规范
+├── CLAUDE.md                                    ← AI 辅助配置（兼容保留）
 │
-├── 01_Parametric_Simulation_Database_Construction.ipynb  ← 步骤1
-├── 02_SRC_Sensitivity_and_Variable_Selection.ipynb       ← 步骤2
-├── 03_ML_Model_Training_and_Evaluation.ipynb            ← 步骤3
-├── 04_EUI_OCEI_Coupling_and_Carbon_Analysis.ipynb       ← 步骤4
+├── experiment_code/
+│   ├── notebooks/
+│   │   ├── 01_Parametric_Simulation_Database_Construction.ipynb  ← 步骤1
+│   │   ├── 02_SRC_Sensitivity_and_Variable_Selection.ipynb       ← 步骤2
+│   │   ├── 03_ML_Model_Training_and_Evaluation.ipynb             ← 步骤3
+│   │   └── 04_EUI_OCEI_Coupling_and_Carbon_Analysis.ipynb        ← 步骤4
+│   ├── tools/                                      ← 图件生成、Notebook 修订和表格脚本
+│   └── original_package/                           ← 原始代码压缩包与解压副本
 │
 ├── input/
 │   └── Beijing.epw                              ← 北京气象文件
@@ -118,8 +125,18 @@ print(f'Python {numpy.__version__}')
 │   ├── emission_factor_sensitivity.csv
 │   └── eui_ocei_factor_compare_bootstrap_src.csv
 │
-├── Revised_Paper_EUI_OCEI_Beijing_Hotel.docx    ← 修改后的论文
-└── 修改方案与结论对照表.md                       ← 审稿意见对照表
+├── paper_assets/
+│   ├── figures/                                 ← 论文素材图（工程示意图、流程链路图等）
+│   └── previews/                                ← 历史预览图
+│
+├── reviewer_comments/                           ← 审稿意见、修订方案、回复信和审计记录
+│   ├── original_comments/
+│   ├── revision_plans/
+│   ├── response_letters/
+│   ├── audits/
+│   └── templates/
+│
+└── manuscript/                                  ← 修订版论文 Word/Markdown 文件
 ```
 
 ## 4. 复现流程
@@ -132,7 +149,7 @@ print(f'Python {numpy.__version__}')
 
 ### 步骤 1: 参数化仿真数据库构建
 
-**Notebook**: `01_Parametric_Simulation_Database_Construction.ipynb`
+**Notebook**: `experiment_code/notebooks/01_Parametric_Simulation_Database_Construction.ipynb`
 
 **功能**:
 - 定义 38 个酒店建筑设计参数空间
@@ -163,11 +180,12 @@ CONFIG = {
 **输出文件**:
 - `data/step1_simulation_dataset.csv` — 主数据集（4640行 × 多列）
 - `outputs_step1/simulation_log.csv` — 仿真日志
-- `outputs_step1/figures/` — 筛选分析图 + 工程示意图
+- `outputs_step1/figures/` — 筛选、偏差分解和敏感性分析图
+- `paper_assets/figures/` — 工程示意图、研究流程链路图等论文素材图
 
 ### 步骤 2: SRC 敏感性分析与变量筛选
 
-**Notebook**: `02_SRC_Sensitivity_and_Variable_Selection.ipynb`
+**Notebook**: `experiment_code/notebooks/02_SRC_Sensitivity_and_Variable_Selection.ipynb`
 
 **功能**:
 - 方向编码（sin/cos 循环特征）
@@ -189,7 +207,7 @@ CONFIG = {
 
 ### 步骤 3: ML 模型训练与比较
 
-**Notebook**: `03_ML_Model_Training_and_Evaluation.ipynb`
+**Notebook**: `experiment_code/notebooks/03_ML_Model_Training_and_Evaluation.ipynb`
 
 **功能**:
 - 17 种回归模型训练与比较
@@ -210,7 +228,7 @@ CONFIG = {
 
 ### 步骤 4: EUI-OCEI 耦合与碳分析
 
-**Notebook**: `04_EUI_OCEI_Coupling_and_Carbon_Analysis.ipynb`
+**Notebook**: `experiment_code/notebooks/04_EUI_OCEI_Coupling_and_Carbon_Analysis.ipynb`
 
 **功能**:
 - 碳排放核算边界定义（电力/天然气/区域供热/区域供冷）
@@ -250,14 +268,19 @@ CONFIG = {
 
 | 图号 | 文件 | 内容 |
 |------|------|------|
-| Fig 1 | `hotel_building_engineering_schematic.png` | 酒店工程示意图（3D + 平面） |
-| Fig 2 | `energy_simulation_workflow.png` | 能耗仿真工作流 |
-| Fig 3 | `carbon_emission_boundary_diagram.png` | 碳排放核算边界 |
+| Fig 1 | `paper_assets/figures/hotel_thermal_engineering_schematic_v4_en.png` | 酒店工程示意图（标准层、立面、系统） |
+| Fig 2 | `paper_assets/figures/research_pipeline_workflow_v4_en.png` | 参数化仿真—机器学习—能碳耦合流程链路图 |
+| — | `outputs_step1/figures/boundary_sensitivity_analysis.png` | 可行性边界敏感性分析 |
+| — | `outputs_step1/figures/bias_stratified_decomposition.png` | 模拟—实测偏差分层分解 |
 | — | `feasibility_screening_analysis.png` | 可行性筛选分析（3面板） |
 | — | `src_vs_shap_comparison.png` | SRC vs SHAP 排序对比 |
 | — | `variable_selection_analysis.png` | 变量筛选截断分析 |
+| — | `outputs_step2/figures/shap_divergence_dependence.png` | SRC-SHAP 分歧变量依赖图 |
+| — | `outputs_step2/figures/marginal_variable_ablation.png` | 边际变量消融分析 |
 | — | `model_test_r2.png` | 模型 R² 比较 |
+| — | `outputs_step3/figures/r2_cumulative_decomposition.png` | 代理模型解释度累积贡献分解 |
 | — | `emission_factor_sensitivity.png` | 排放因子敏感性 |
+| — | `outputs_step4/figures/emission_factor_threshold_analysis.png` | 电力排放因子阈值扫描 |
 | — | `eui_ocei_factor_compare.png` | EUI vs OCEI 因素对比 |
 
 ## 6. 常见问题
@@ -316,6 +339,100 @@ CONFIG = {
 
 ---
 
-**最后更新**: 2026-06-15  
+**最后更新**: 2026-06-16  
 **联系**: 详见论文作者信息  
 **许可证**: 本代码包仅供学术评审和研究复现使用
+
+---
+
+## 8. 2026-06-15审稿修订验证补充
+
+本次修订针对 MDPI Sustainability 审稿意见，对四个 Notebook 做了逐 Cell 检查、代码修复和本地快速复现实验。每个代码 Cell 前均已新增一段中文说明和一段英文说明，说明内容覆盖该 Cell 的研究目的、输入数据、核心计算、输出文件以及对应审稿意见。
+
+### 8.1 快速验证模式
+
+为避免每次复现实验都触发 20,000 个 LHS 样本和 EnergyPlus 全量仿真，Notebook 现在支持环境变量控制：
+
+```powershell
+$env:EUI_FAST_MODE = "1"
+$env:EUI_N_SAMPLES = "120"
+$env:EUI_RUN_ENERGYPLUS = "0"
+jupyter notebook
+```
+
+其中：
+
+- `EUI_FAST_MODE=1`：降低 bootstrap、交叉验证和随机搜索的计算量，仅用于代码逻辑和复现流程验证。
+- `EUI_N_SAMPLES=120`：设置 Notebook 01 的 LHS 快速样本量。
+- `EUI_RUN_ENERGYPLUS=0`：跳过 EnergyPlus 调用，用可复现的代理数据验证 Python 管道。
+- `EUI_RUN_ENERGYPLUS=1`：启动真实 EnergyPlus 仿真，仅建议在确认环境无误后运行。
+
+### 8.2 全量仿真模式
+
+正式论文结果仍应使用全量仿真设置：
+
+```powershell
+$env:EUI_FAST_MODE = "0"
+$env:EUI_N_SAMPLES = "20000"
+$env:EUI_RUN_ENERGYPLUS = "1"
+jupyter notebook
+```
+
+全量模式将产生约 4,640 个几何可行样本，预计需要 16-24 小时，具体取决于 CPU 核数、磁盘速度和 EnergyPlus 并发设置。当前仓库中保留的 116 样本数据用于代码审阅和快速复现，不应替代正式全量仿真数据。
+
+### 8.3 本地验证记录
+
+本次验证环境：
+
+- Python 3.11.5
+- NumPy 2.4.3, pandas 3.0.1, SciPy 1.17.1
+- scikit-learn 1.8.0, statsmodels 0.14.6
+- Matplotlib 3.10.8, seaborn 0.13.2
+- SHAP 0.51.0, XGBoost 3.2.0, LightGBM 4.6.0
+- Jupyter 内核：Python 3.11
+
+验证方式：使用 `nbclient` 在干净内核中顺序执行四个 Notebook，环境变量为 `EUI_FAST_MODE=1`、`EUI_N_SAMPLES=120`、`EUI_RUN_ENERGYPLUS=0`。四个 Notebook 均已通过执行验证。由于本地 `jupyter nbconvert` 被 `jupyter_contrib_nbextensions` 的旧版依赖阻断，本次采用 `nbclient` 执行验证；该问题属于本地 Jupyter 插件兼容性问题，不影响 Notebook 代码本身。
+
+### 8.4 审稿意见对应的新增输出
+
+本次修订新增或强化的关键输出包括：
+
+- `outputs_step1/feasibility_screening_variable_distribution_shift.csv`：逐变量筛选前后 KS 统计量和 Jensen-Shannon 距离，用于回应可行性筛选选择偏差问题。
+- `outputs_step2/src_shap_rank_comparison.csv` 与 `outputs_step2/figures/src_vs_shap_comparison.png`：SRC 与 SHAP 排序一致性验证，用于回应 SRC 线性方法局限。
+- `outputs_step2/figures/variable_selection_analysis.png`：18 个关键变量截断的碎石图、累计贡献和 CV 平台证据。
+- `outputs_step3/model_hyperparameters.csv`：全部模型最终超参数和搜索策略记录。
+- `outputs_step3/noncore_variable_impact.csv`：18 变量与全变量模型性能对比，用于回应非核心变量固定问题。
+- `outputs_step4/emission_factor_sensitivity.csv` 与 `outputs_step4/figures/emission_factor_sensitivity.png`：排放因子和电网脱碳情景敏感性分析。
+- `outputs_step4/figures/carbon_contribution_dual_view.png`：将原绝对值与归一化碳贡献图合并为双视图图件，回应图表冗余问题。
+
+### 8.5 仍需在论文正文中诚实保留的边界
+
+本代码包已经补足审稿人要求的大部分计算证据，但论文正文和回复信仍应明确承认三项边界：
+
+1. 高 R² 表示 EnergyPlus 仿真数据上的代理模型保真度，不等同于真实酒店建筑预测精度。
+2. 当前模型尚无逐栋真实酒店运行数据校准，Sim-to-Real Transfer Gap 仍是最重要限制。
+3. 酒店星级、运营水平、入住率行为和设备管理策略未被显式分类，模型外推到不同酒店档次时需要谨慎。
+
+## 9. 2026-06-16 V1 目录与证据增强
+
+本版本将工作区整理为五类核心材料：`experiment_code/` 存放实验代码，`reviewer_comments/` 存放审稿意见与回复材料，`manuscript/` 存放论文正文，`paper_assets/` 存放非中间计算输出的论文素材图，`outputs_step1/` 至 `outputs_step4/` 保持为四步实验输出目录。Notebook 已加入项目根目录自动识别逻辑，因此从仓库根目录或 `experiment_code/notebooks/` 中启动均会把输出写回根目录下的标准输出文件夹。
+
+本版本进一步加入面向审稿说服力的补充分析：
+
+- `outputs_step1/boundary_sensitivity_results.csv` 与 `outputs_step1/figures/boundary_sensitivity_analysis.png`：检验可行面积比边界从 0.50–0.97 到 0.60–0.90 时样本保留率、EUI 均值和分布漂移，回应筛选阈值是否任意的问题。
+- `outputs_step1/bias_stratified_decomposition.csv` 与 `outputs_step1/figures/bias_stratified_decomposition.png`：按 DHW、窗墙比、建筑层数和 HVAC 效率分层展示模拟—实测 EUI 偏差，避免只用总体均值回应 Sim-to-Real Gap。
+- `outputs_step2/shap_src_divergence_incremental_r2.csv` 与 `outputs_step2/figures/shap_divergence_dependence.png`：识别 SRC 与 SHAP 排名分歧最大的变量，并用增量 R² 解释非线性补充价值。
+- `outputs_step2/marginal_variable_ablation.csv` 与 `outputs_step2/figures/marginal_variable_ablation.png`：逐一移除第 15–18 个边际变量，检验 18 变量截断是否只是机械阈值。
+- `outputs_step3/r2_cumulative_decomposition.csv` 与 `outputs_step3/figures/r2_cumulative_decomposition.png`：按物理变量组分解代理模型 R² 累积贡献，说明高 R² 主要来自仿真机制的结构化可解释性，而不是信息泄漏。
+- `outputs_step4/emission_factor_threshold_sweep.csv` 与 `outputs_step4/figures/emission_factor_threshold_analysis.png`：扫描电力排放因子从 0.15 到 0.75 kgCO2e/kWh 的变化，识别电网脱碳路径下 EUI-OCEI 耦合结构的稳定区间和转折风险。
+
+快速验证命令如下：
+
+```powershell
+$env:EUI_FAST_MODE = "1"
+$env:EUI_N_SAMPLES = "200"
+$env:EUI_RUN_ENERGYPLUS = "0"
+python -m jupyter notebook experiment_code/notebooks
+```
+
+正式复现实验仍应使用 `EUI_FAST_MODE=0`、`EUI_N_SAMPLES=20000`、`EUI_RUN_ENERGYPLUS=1`，并确认 `C:/EnergyPlusV25-2-0/energyplus.exe` 可用。

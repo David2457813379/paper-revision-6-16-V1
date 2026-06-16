@@ -1,0 +1,7 @@
+﻿case,removed_feature,n_features,cv_r2_mean,delta_r2_vs_top18,physical_role
+all_top18,,18,0.9139446909776497,0.0,完整 18 变量基准
+remove_heat_set,heat_set,17,0.9112333371398339,-0.002711353837815844,冬季供暖设定温度，代表运行控制边界
+remove_light_power,light_power,17,0.9146883812067422,0.0007436902290924863,边际变量
+remove_floor_height,floor_height,17,0.9143840834334144,0.00043939245576463115,边际变量
+remove_public_area,public_area,17,0.914969824337032,0.0010251333593822576,边际变量
+remove_rank15_to_18,"heat_set, light_power, floor_height, public_area",14,0.9123794632673301,-0.0015652277103196388,同时移除第 15-18 名边际变量的保守性检验

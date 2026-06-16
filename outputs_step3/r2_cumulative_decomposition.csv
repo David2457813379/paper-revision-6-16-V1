@@ -1,0 +1,7 @@
+﻿step,n_features,features_added,cv_r2_mean,cv_r2_std,incremental_r2
+生活热水,3,"dhw_per_person, dhw_temp, room_count",0.6704461078154562,0.08077198625298275,0.6704461078154562
+几何形态,8,"floor_num, footprint_area_m2, aspect_ratio, floor_height, public_area",0.8583973430956989,0.052879690316061045,0.1879512352802427
+HVAC 与运行,13,"cop_heating, boiler_eff, heat_set, fresh_air_ach, operation_hours",0.9000747024150718,0.022227684176056254,0.041677359319372886
+围护结构,15,"wwr, wall_thick",0.9140080697186322,0.024572653935300247,0.013933367303560429
+功能与内扰,18,"light_power, orientation_sin, orientation_cos",0.9108350600375426,0.027097815021311956,-0.003173009681089689
+Top-18 + 二阶非线性项,18,PolynomialFeatures(degree=2),0.3197550951274825,0.047683857000460045,-0.59107996491006

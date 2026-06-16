@@ -7,6 +7,10 @@ venv/
 
 # Jupyter
 .ipynb_checkpoints/
+validation_run_*/
+archive/
+archive/validation/
+archive/notebook_backups/
 
 # EnergyPlus simulation outputs (too large)
 outputs_step1/runs/
@@ -16,6 +20,7 @@ outputs_step1/generated_idf/
 *.bak
 *.bak2
 _test_*.py
+_test_*.ipynb
 _e2e_*.py
 fix_notebooks*.py
 reconstruct_dataset.py
@@ -23,6 +28,16 @@ rebuild_and_run_all.py
 run_full_pipeline.py
 generate_engineering_diagram.py
 run_e2e_test.py
+
+# Local agent/runtime state
+.agents/
+.claude/
+.codex/
+experiment_code/tools/__pycache__/
+experiment_code/original_package/
+reviewer_comments/original_comments/评委意见/新建 DOCX 文档.docx
+~$*.docx
+*.log
 
 # OS
 .DS_Store

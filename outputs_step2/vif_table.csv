@@ -1,40 +1,40 @@
-﻿feature,VIF
-orientation_cos,11.209194960219678
-orientation_sin,10.71346973112408
-floor_num,4.874872470129677
-room_count,4.789896129971804
-footprint_area_m2,2.6500648110398406
-window_type_2,2.2463567146947727
-window_type_3,2.1805959326222095
-u_wall,1.9268077417760157
-boiler_eff,1.7741221560615128
-u_win_e,1.7346161584712965
-shgc_w,1.6925127041391217
-shgc_s,1.676984809904995
-room_area,1.669731949173742
-equip_power,1.6585185152877882
-dhw_per_person,1.589872860875255
-shgc_n,1.5755205239004915
-shgc_e,1.557340088748592
-cop_heating,1.545835808248931
-u_win_s,1.5112523447027333
-roof_insul_thick,1.5052242318928486
-dhw_temp,1.4977784013588873
-wwr,1.486335161767249
-aspect_ratio,1.4744246176465425
-wall_thick,1.4729869936593771
-operation_hours,1.453259163881702
-fan_eff,1.436168257801317
-public_area,1.4295443890580446
-u_ground,1.4273695249435683
-u_roof,1.4031616564964076
-occupancy_density,1.3730845548189659
-cop_cooling,1.3637704216973356
-light_power,1.3569514863158987
-floor_height,1.3568869604436233
-insul_thick,1.3447053025765507
-fresh_air_ach,1.3291135239037744
-u_win_w,1.3211057719304218
-cool_set,1.3053997752547166
-u_win_n,1.2975837383660336
-heat_set,1.2872547151593725
+﻿feature,feature_full,VIF
+orientation_cos,Cosine term of overall building orientation (-),11.209194960219678
+orientation_sin,Sine term of overall building orientation (-),10.71346973112408
+floor_num,Total number of floors (floors),4.874872470129677
+room_count,Total number of guest rooms (rooms),4.789896129971804
+footprint_area_m2,Building footprint area = main building length × main building width (m²),2.6500648110398406
+window_type_2,Window construction type dummy: Type 2 relative to Type 1 baseline (-),2.2463567146947727
+window_type_3,Window construction type dummy: Type 3 relative to Type 1 baseline (-),2.1805959326222095
+u_wall,Heat transfer coefficient of main external wall structure (W/(m²·K)),1.9268077417760157
+boiler_eff,Thermal efficiency of hot water boiler (-),1.7741221560615128
+u_win_e,Heat transfer coefficient of east-facing windows (W/(m²·K)),1.7346161584712965
+shgc_w,Solar heat gain coefficient of west-facing windows (-),1.6925127041391217
+shgc_s,Solar heat gain coefficient of south-facing windows (-),1.676984809904995
+room_area,Floor area of a single guest room (m²),1.669731949173742
+equip_power,Indoor equipment power density (W/m²),1.6585185152877882
+dhw_per_person,Daily domestic hot water consumption per capita (m³/(person·d)),1.589872860875255
+shgc_n,Solar heat gain coefficient of north-facing windows (-),1.5755205239004915
+shgc_e,Solar heat gain coefficient of east-facing windows (-),1.557340088748592
+cop_heating,COP of heat pump heating (-),1.545835808248931
+u_win_s,Heat transfer coefficient of south-facing windows (W/(m²·K)),1.5112523447027333
+roof_insul_thick,Roof insulation layer thickness (m),1.5052242318928486
+dhw_temp,Domestic hot water supply temperature (°C),1.4977784013588873
+wwr,Overall window-to-wall ratio (-),1.486335161767249
+aspect_ratio,Building length-to-width ratio (-),1.4744246176465425
+wall_thick,External wall structure thickness (m),1.4729869936593771
+operation_hours,Total annual operating hours of system (h),1.453259163881702
+fan_eff,Efficiency of air conditioning fan (-),1.436168257801317
+public_area,Total area of public areas (m²),1.4295443890580446
+u_ground,Heat transfer coefficient of ground foundation (W/(m²·K)),1.4273695249435683
+u_roof,Heat transfer coefficient of roof (W/(m²·K)),1.4031616564964076
+occupancy_density,Personnel density (person/m²),1.3730845548189659
+cop_cooling,Rated COP of refrigeration unit (-),1.3637704216973356
+light_power,Indoor lighting power density (W/m²),1.3569514863158987
+floor_height,Standard floor height (m),1.3568869604436233
+insul_thick,External wall insulation layer thickness (m),1.3447053025765507
+fresh_air_ach,Fresh air exchange rate (times/h),1.3291135239037744
+u_win_w,Heat transfer coefficient of west-facing windows (W/(m²·K)),1.3211057719304218
+cool_set,Summer cooling set temperature (°C),1.3053997752547166
+u_win_n,Heat transfer coefficient of north-facing windows (W/(m²·K)),1.2975837383660336
+heat_set,Winter heating set temperature (°C),1.2872547151593725

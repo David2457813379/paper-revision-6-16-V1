@@ -7,7 +7,15 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import FancyArrowPatch, Polygon, Rectangle
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+def find_repo_root(start: Path) -> Path:
+    start = start.resolve()
+    for candidate in [start, *start.parents]:
+        if (candidate / "input" / "Beijing.epw").exists() or (candidate / ".git").exists():
+            return candidate
+    return Path.cwd().resolve()
+
+
+PROJECT_ROOT = find_repo_root(Path(__file__))
 FIG_DIR = PROJECT_ROOT / "outputs_step1" / "figures"
 
 
